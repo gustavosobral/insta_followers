@@ -1,0 +1,21 @@
+%html
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+
+    %link{:rel => :stylesheet, :type => :"text/css", :href => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css'}
+  %body
+    %h1 Users
+
+    %table.table.table-striped
+      %tr
+        %th Username
+        %th ID
+
+      - @not_followers.each do |user|
+        %tr
+          %td= user.username
+          %td= user.id
+
+    %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
