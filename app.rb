@@ -1,9 +1,12 @@
 require 'json'
 require 'dotenv'
-require 'byebug'
 require 'sinatra'
 require 'sinatra/cross_origin'
 require 'rest-client'
+
+if ENV['RACK_ENV'] == 'development'
+  require 'byebug'
+end
 
 configure do
   Dotenv.load
