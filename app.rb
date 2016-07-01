@@ -1,17 +1,14 @@
-require 'json'
-require 'dotenv'
 require 'sinatra'
 require 'sinatra/cross_origin'
+require 'json'
+require 'dotenv'
 require 'rest-client'
+require 'sprockets'
+require 'uglifier'
+require 'sass'
 
 if ENV['RACK_ENV'] == 'development'
   require 'byebug'
-end
-
-configure do
-  Dotenv.load
-  enable :cross_origin
-  set :haml, :format => :html5
 end
 
 class User
@@ -25,39 +22,58 @@ class User
   end
 end
 
-get '/' do
-  haml :index
-end
+class InstaFollowers < Sinatra::Base
+  Dotenv.load
+  enable :cross_origin
 
-get '/get_token' do
-  redirect '/' if params[:code].nil?
+  set :haml, :format => :html5
+  set :environment, Sprockets::Environment.new
 
-  response = RestClient.post 'https://api.instagram.com/oauth/access_token',
-    "client_id" => ENV['CLIENT_ID'],
-    "client_secret" => ENV['CLIENT_SECRET'],
-    "grant_type" => "authorization_code",
-    "redirect_uri"=> "#{ENV['URL']}/get_token",
-    "code" => params[:code].to_s
+  environment.append_path "assets/stylesheets"
+  environment.append_path "assets/javascripts"
 
-  body = JSON.parse response.body
-  redirect "/list?access_token=#{body['access_token']}"
-end
+  environment.js_compressor  = :uglify
+  environment.css_compressor = :scss
 
-get '/list' do
-  follows = []
-  followed_by = []
-  @not_followers = []
+  get "/assets/*" do
+    env["PATH_INFO"].sub!("/assets", "")
+    settings.environment.call(env)
+  end
 
-  response = RestClient.get 'https://api.instagram.com/v1/users/self/follows',
-    {:params => {:access_token => params[:access_token]}}  
-  body = JSON.parse response.body, object_class: OpenStruct
-  body.data.each { |user| follows << User.new(user) }
+  get '/' do
+    haml :index
+  end
 
-  response = RestClient.get 'https://api.instagram.com/v1/users/self/followed-by',
-    {:params => {:access_token => params[:access_token]}}  
-  body = JSON.parse response.body, object_class: OpenStruct
-  body.data.each { |user| followed_by << User.new(user) }
+  get '/get_token' do
+    redirect '/' if params[:code].nil?
 
-  follows.each { |user| @not_followers << user if !followed_by.map(&:username).include? user.username }
-  haml :list
+    response = RestClient.post 'https://api.instagram.com/oauth/access_token',
+      "client_id" => ENV['CLIENT_ID'],
+      "client_secret" => ENV['CLIENT_SECRET'],
+      "grant_type" => "authorization_code",
+      "redirect_uri"=> "#{ENV['URL']}/get_token",
+      "code" => params[:code].to_s
+
+    body = JSON.parse response.body
+    redirect "/list?access_token=#{body['access_token']}"
+  end
+
+  get '/list' do
+    follows = []
+    followed_by = []
+    @not_followers = []
+
+    response = RestClient.get 'https://api.instagram.com/v1/users/self/follows',
+      {:params => {:access_token => params[:access_token]}}  
+    body = JSON.parse response.body, object_class: OpenStruct
+    body.data.each { |user| follows << User.new(user) }
+
+    response = RestClient.get 'https://api.instagram.com/v1/users/self/followed-by',
+      {:params => {:access_token => params[:access_token]}}  
+    body = JSON.parse response.body, object_class: OpenStruct
+    body.data.each { |user| followed_by << User.new(user) }
+
+    follows.each { |user| @not_followers << user if !followed_by.map(&:username).include? user.username }
+    haml :list
+  end
 end
