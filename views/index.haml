@@ -8,12 +8,13 @@
     %link{:rel => :stylesheet, :type => :"text/css", :href => 'assets/app.css'}
     %script{:src => 'https://use.fontawesome.com/38e56cc775.js'}
   %body
-    %h1.center-align See Followers
-    %p.center-align Veja os contatos que nao te seguem
+    %h1.center-align Insta Followers
+    %h5.center-align See the contacts on Instagram who isn't following you
 
     %div.center-align
-      %a{:href => "https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=#{ENV['URL']}/get_token&response_type=code&scope=follower_list"}
-        %button.waves-effect.waves-light.btn{}Login with Instagram
+      %a.waves-effect.waves-light.btn.btn-instagram{:href => "https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=#{ENV['URL']}/get_token&response_type=code&scope=follower_list"}
+        Login with Instagram
+        %i.fa.fa-instagram.medium.left
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}

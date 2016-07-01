@@ -1,0 +1,28 @@
+//= require_tree .
+
+body { background-color: aliceblue; }
+
+nav { background-color: #3F729B; }
+
+table { background-color: #fff; }
+
+.btn-instagram {
+  background-color: #3F729B;
+  padding: 0 1rem;
+  margin-top: 25px; }
+
+.btn-instagram:hover { background-color: #3F729B; }
+
+.fa-instagram {
+  border-right: 1px solid white;
+  padding-right: 15px; }
+
+.fa-home { margin: 3px 0 0 15px; }
+
+table.centered tbody tr th { text-align: center; }
+
+.list-table { border: 1px solid #c5ccdf; }
+
+.profile-picture {
+  border-radius: 50%;
+  height: 100px; }

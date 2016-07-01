@@ -17,7 +17,7 @@
     .container
       %h1 Users
 
-      %table.table.striped.highlight
+      %table.table.striped.centered.responsive-table.list-table
         %tr
           %th Photo
           %th ID
@@ -27,10 +27,12 @@
         - @not_followers.each do |user|
           %tr
             %td
-              %img{:src => user.profile_picture}
+              %img.profile-picture{:src => user.profile_picture}
             %td= user.id
             %td= user.username
-            %td X
+            %td
+              %a.btn-floating.btn-large.waves-effect.waves-light.red
+                %i.fa.fa-times.medium
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}
