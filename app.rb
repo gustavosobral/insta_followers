@@ -36,7 +36,7 @@ get '/get_token' do
     "client_id" => ENV['CLIENT_ID'],
     "client_secret" => ENV['CLIENT_SECRET'],
     "grant_type" => "authorization_code",
-    "redirect_uri"=> "http://localhost:3000/get_token",
+    "redirect_uri"=> "#{ENV['URL']}/get_token",
     "code" => params[:code].to_s
 
   body = JSON.parse response.body

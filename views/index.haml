@@ -10,7 +10,7 @@
     %p.center-align Veja os contatos que nao te seguem
 
     %div.center-align
-      %a{:href => 'https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=http://localhost:3000/get_token&response_type=code&scope=follower_list'}
+      %a{:href => "https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=#{ENV['URL']}/get_token&response_type=code&scope=follower_list"}
         %button.waves-effect.waves-light.btn{}Login with Instagram
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
