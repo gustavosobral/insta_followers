@@ -2,10 +2,14 @@ require 'json'
 require 'dotenv'
 require 'byebug'
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'rest-client'
 
-Dotenv.load
-set :haml, :format => :html5
+configure do
+  Dotenv.load
+  enable :cross_origin
+  set :haml, :format => :html5
+end
 
 class User
   attr_accessor :username, :profile_picture, :id, :full_name
