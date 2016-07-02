@@ -37,8 +37,8 @@ class InstaFollowers < Sinatra::Base
   set :environment, Sprockets::Environment.new
   set :sessions => true
 
-  environment.append_path "assets/stylesheets"
-  environment.append_path "assets/javascripts"
+  environment.append_path 'assets/stylesheets'
+  environment.append_path 'assets/javascripts'
 
   environment.js_compressor  = :uglify
   environment.css_compressor = :scss
@@ -65,7 +65,7 @@ class InstaFollowers < Sinatra::Base
   end
 
   get '/assets/*' do
-    env["PATH_INFO"].sub!('/assets', '')
+    env['PATH_INFO'].sub!('/assets', '')
     settings.environment.call(env)
   end
 end
