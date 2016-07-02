@@ -10,11 +10,11 @@ require 'sprockets'
 require 'uglifier'
 require 'sass'
 
-if ENV['RACK_ENV'] == 'development'
+configure :development do
   DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 end
 
-if ENV['RACK_ENV'] == 'production'
+configure :production do
   DataMapper.setup(:default, ENV['DATABASE_URL'])
 end
 
