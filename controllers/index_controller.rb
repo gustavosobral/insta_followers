@@ -32,6 +32,10 @@ module Sinatra
             session[:user_id] = nil
             redirect '/'
           end
+
+          app.get '/policy' do
+            haml :policy
+          end
         end
       end
     end

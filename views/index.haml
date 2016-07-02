@@ -9,13 +9,17 @@
     %link{:rel => :stylesheet, :type => :"text/css", :href => 'assets/app.css'}
     %script{:src => 'https://use.fontawesome.com/38e56cc775.js'}
   %body
-    %h1.center-align Insta Followers
-    %h5.center-align See the contacts on Instagram who isn't following you
+    %section.index-section
+      %a{:href => '/policy'}
+        %p.left-align.policy App Policy
+      <a href="https://github.com/gustavosobral/insta_followers"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+      %h1.center-align Insta Followers
+      %h5.center-align See the contacts on Instagram who isn't following you
 
-    %div.center-align
-      %a.waves-effect.waves-light.btn.btn-instagram{:href => "https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=#{ENV['URL']}/login&response_type=code&scope=follower_list"}
-        Login with Instagram
-        %i.fa.fa-instagram.medium.left
+      %div.center-align
+        %a.waves-effect.waves-light.btn.btn-instagram{:href => "https://www.instagram.com/oauth/authorize/?client_id=312f2c0cf08c4581b4da949ea64bd8d2&redirect_uri=#{ENV['URL']}/login&response_type=code&scope=follower_list"}
+          Login with Instagram
+          %i.fa.fa-instagram.medium.left
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}
