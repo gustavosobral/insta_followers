@@ -14,26 +14,32 @@
         %i.fa.fa-home.medium
       %ul#nav-mobile.right.hide-on-med-and-down
         %li
+          %img.user-picture{:src => @user.profile_picture, :alt => @user.username}
+        %li
           %a{:href => '/logout'} Logout
     .container
       %h3 Users
 
-      %table.table.striped.centered.responsive-table.list-table
-        %tr
-          %th Photo
-          %th ID
-          %th Username
-          %th Unfollow
-
-        - @not_followers.each do |user|
+      %form{:id => 'unfollow-form', :method => 'post', :action => '/unfollow' }
+        %table.table.striped.centered.responsive-table.list-table
           %tr
-            %td
-              %img.profile-picture{:src => user.profile_picture}
-            %td= user.id
-            %td= user.username
-            %td
-              %a.btn-floating.btn-large.waves-effect.waves-light.red
-                %i.fa.fa-times.medium
+            %th Photo
+            %th ID
+            %th Username
+            %th Unfollow
+
+          - @not_followers.each do |user|
+            %tr
+              %td
+                %img.profile-picture{:src => user.profile_picture}
+              %td= user.id
+              %td= user.username
+              %td
+                %input.filled-in{:type => 'checkbox', :id => user.id, :name => user.id, :value => 'true'}
+                %label{:for => user.id}
+        %div.right-align
+          %button.btn-floating.btn-large.btn-unfollow.waves-effect.waves-light.red
+            %i.fa.fa-times.medium
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}

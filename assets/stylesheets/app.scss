@@ -25,6 +25,13 @@ table.centered tbody tr th { text-align: center; }
 
 .list-table { border: 1px solid #c5ccdf; }
 
+.user-picture {
+  height: 45px;
+  border-radius: 50%;
+  margin: 10px 15px 0 15px; }
+
 .profile-picture {
   border-radius: 50%;
-  height: 100px; }
+  height: 75px; }
+
+.btn-unfollow { margin-top: 15px; }

@@ -21,6 +21,14 @@ module Sinatra
             follows.each { |user| @not_followers << user if !followed_by.map(&:username).include? user.username }
             haml :list
           end
+
+          app.post '/unfollow', :auth => :user do
+            ids = params.keys
+            ids.each do |id| 
+              RestClient.post "https://api.instagram.com/v1/users/#{id}/relationship", :access_token => @user.access_token, :action => 'unfollow'
+            end
+            redirect '/list'
+          end
         end
       end
     end
