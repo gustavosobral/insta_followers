@@ -15,3 +15,7 @@ group :development do
   gem 'byebug'
   gem 'dm-sqlite-adapter'
 end
+
+group :production do
+  gem 'dm-postgres-adapter'
+end
