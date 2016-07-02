@@ -3,20 +3,20 @@ module Sinatra
     module Controllers
       module ListController
         def self.registered(app)
-          app.get '/list' do
+          app.get '/list', :auth => :user do
             follows = []
             followed_by = []
             @not_followers = []
 
             response = RestClient.get 'https://api.instagram.com/v1/users/self/follows',
-              {:params => {:access_token => params[:access_token]}}  
+              {:params => {:access_token => @user.access_token}}
             body = JSON.parse response.body, object_class: OpenStruct
-            body.data.each { |user| follows << User.new(user) }
+            body.data.each { |user| follows << Relation.new(user) }
 
             response = RestClient.get 'https://api.instagram.com/v1/users/self/followed-by',
-              {:params => {:access_token => params[:access_token]}}  
+              {:params => {:access_token => @user.access_token}}
             body = JSON.parse response.body, object_class: OpenStruct
-            body.data.each { |user| followed_by << User.new(user) }
+            body.data.each { |user| followed_by << Relation.new(user) }
 
             follows.each { |user| @not_followers << user if !followed_by.map(&:username).include? user.username }
             haml :list
