@@ -18,6 +18,8 @@ configure :production do
   DataMapper.setup(:default, ENV['DATABASE_URL'])
 end
 
+DataMapper::Property::String.length(255)
+
 require_relative 'controllers/index_controller'
 require_relative 'controllers/list_controller'
 
