@@ -9,7 +9,45 @@
     %link{:rel => :stylesheet, :type => :"text/css", :href => 'assets/app.css'}
     %script{:src => 'https://use.fontawesome.com/38e56cc775.js'}
   %body
-    %h1.center-align App Policy
+    - if !@user.nil?
+      %nav
+        %div.nav-wrapper.container
+          %a.brand-logo{:href => '/list'}
+            %i.fa.fa-home.medium
+          %ul#nav-mobile.right.hide-on-med-and-down
+            %li
+              %img.user-picture{:src => @user.profile_picture, :alt => @user.username}
+            %li
+              %a{:href => '/logout'} Logout
+
+    %section.policy-section
+      %div.container
+        %div.row
+          %div.col.l3
+            - if @user.nil?
+              %a.brand-logo{:href => '/list'}
+                %i.fa.fa-arrow-left.medium.home-arrow
+            - else
+              %div.empty
+          %div.col.l6
+            %h1.center-align App Policy
+        %div.row
+          %div.col.l6.offset-l3
+            %p By use this application, you agree with this policy here exposed. If you don't agree with these terms, you can't use the service.
+            %p The user is total responsabile for the correct use of the application, with according to all legal requirements, regulations and contractual perhaps applicable. The application doesn't use or share the user data and doesn't do any background process.
+            %p This app is free and always be, there is no ads, no charge, no any kind of revenue that could be generated. The source code of this applications is also open-source and hosted on GitHub, contributions are always welcome.
+
+    %footer.page-footer.light-blue.darken-3
+      %div.container.row
+        %div.col.l6.right-align
+          %a{:href => '/policy'}
+            %p.footer-link App Policy
+        %div.col.l6.left-align
+          %a{:href => 'mailto:ghsobral@gmail.com?Subject=Insta_Followers'}
+            %p.footer-link Contact
+      %div.footer-copyright
+        %div.container.right-align
+          Made with <i class="fa fa-heart"></i> using Sinatra!  
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}
