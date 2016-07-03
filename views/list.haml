@@ -21,7 +21,13 @@
             
     %section.list-section
       %div.container
-        %h3 Users
+        %div.row
+          %div.col.l9
+            %h3 Users
+          %div.col.l3.right-align
+            %button.btn.btn-select-all.waves-effect.waves-light.green{:onclick => 'selectAll()'}
+              Select All
+              %i.fa.fa-check.medium.left
 
         %form{:id => 'unfollow-form', :method => 'post', :action => '/unfollow' }
           %table.table.striped.bordered.centered.responsive-table.list-table
@@ -38,7 +44,7 @@
                 %td= user.id
                 %td= user.username
                 %td
-                  %input.filled-in{:type => 'checkbox', :id => user.id, :name => user.id, :value => 'true'}
+                  %input.filled-in.checkboxes{:type => 'checkbox', :id => user.id, :name => user.id, :value => 'true'}
                   %label{:for => user.id}
           %div.right-align
             %button.btn.btn-unfollow.waves-effect.waves-light.red
