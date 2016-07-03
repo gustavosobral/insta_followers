@@ -9,37 +9,53 @@
     %link{:rel => :stylesheet, :type => :"text/css", :href => 'assets/app.css'}
     %script{:src => 'https://use.fontawesome.com/38e56cc775.js'}
   %body
-    %nav.nav-wrapper
-      %a.brand-logo{:href => '/list'}
-        %i.fa.fa-home.medium
-      %ul#nav-mobile.right.hide-on-med-and-down
-        %li
-          %img.user-picture{:src => @user.profile_picture, :alt => @user.username}
-        %li
-          %a{:href => '/logout'} Logout
-    .container
-      %h3 Users
+    %nav
+      %div.nav-wrapper.container
+        %a.brand-logo{:href => '/list'}
+          %i.fa.fa-home.medium
+        %ul#nav-mobile.right.hide-on-med-and-down
+          %li
+            %img.user-picture{:src => @user.profile_picture, :alt => @user.username}
+          %li
+            %a{:href => '/logout'} Logout
+            
+    %section.list-section
+      %div.container
+        %h3 Users
 
-      %form{:id => 'unfollow-form', :method => 'post', :action => '/unfollow' }
-        %table.table.striped.centered.responsive-table.list-table
-          %tr
-            %th Photo
-            %th ID
-            %th Username
-            %th Unfollow
-
-          - @not_followers.each do |user|
+        %form{:id => 'unfollow-form', :method => 'post', :action => '/unfollow' }
+          %table.table.striped.bordered.centered.responsive-table.list-table
             %tr
-              %td
-                %img.profile-picture{:src => user.profile_picture}
-              %td= user.id
-              %td= user.username
-              %td
-                %input.filled-in{:type => 'checkbox', :id => user.id, :name => user.id, :value => 'true'}
-                %label{:for => user.id}
-        %div.right-align
-          %button.btn-floating.btn-large.btn-unfollow.waves-effect.waves-light.red
-            %i.fa.fa-times.medium
+              %th Photo
+              %th ID
+              %th Username
+              %th Unfollow
+
+            - @not_followers.each do |user|
+              %tr
+                %td
+                  %img.profile-picture{:src => user.profile_picture}
+                %td= user.id
+                %td= user.username
+                %td
+                  %input.filled-in{:type => 'checkbox', :id => user.id, :name => user.id, :value => 'true'}
+                  %label{:for => user.id}
+          %div.right-align
+            %button.btn.btn-unfollow.waves-effect.waves-light.red
+              Unfollow
+              %i.fa.fa-times.medium.left
+
+    %footer.page-footer.light-blue.darken-3
+      %div.container.row
+        %div.col.l6.right-align
+          %a{:href => '/policy'}
+            %p.footer-link App Policy
+        %div.col.l6.left-align
+          %a{:href => 'mailto:ghsobral@gmail.com?Subject=Insta_Followers'}
+            %p.footer-link Contact
+      %div.footer-copyright
+        %div.container.right-align
+          Made with <i class="fa fa-heart"></i> using Sinatra!            
 
     %script{:src => 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'}
     %script{:src => 'assets/app.js'}

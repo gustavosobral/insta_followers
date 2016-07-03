@@ -1,17 +1,25 @@
 //= require_tree .
 
-body { background-color: aliceblue; }
+body { background-color: #fff; }
 
 nav { background-color: #3F729B; }
 
 table { background-color: #fff; }
 
+.light-blue.darken-3 { background-color: #3f729b !important; }
+
+td { padding: 10px 5px; }
+
 .policy { margin-left: 10px; }
+
+.index {
+  color: #3F729B;
+  padding-top: 60px; }
 
 .btn-instagram {
   background-color: #3F729B;
   padding: 0 1rem;
-  margin-top: 25px; }
+  margin: 25px 0 75px 0; }
 
 .btn-instagram:hover { background-color: #3F729B; }
 
@@ -23,7 +31,9 @@ table { background-color: #fff; }
 
 table.centered tbody tr th { text-align: center; }
 
-.list-table { border: 1px solid #c5ccdf; }
+.list-section{ margin: 40px 0 70px 0; }
+
+.list-table { border: 1px solid #d0d0d0; }
 
 .user-picture {
   height: 45px;
@@ -32,6 +42,8 @@ table.centered tbody tr th { text-align: center; }
 
 .profile-picture {
   border-radius: 50%;
-  height: 75px; }
+  height: 55px; }
 
 .btn-unfollow { margin-top: 15px; }
+
+.footer-link { color: #d4dfe7; }
