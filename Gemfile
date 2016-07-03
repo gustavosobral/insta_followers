@@ -13,11 +13,12 @@ gem 'uglifier'
 
 group :development do
   gem 'byebug'
-  gem "sqlite3"
+  gem 'sqlite3'
   gem 'dm-sqlite-adapter'
 end
 
 group :production do
-  gem "pg"
+  gem 'puma'
+  gem 'pg'
   gem 'dm-postgres-adapter'
 end
