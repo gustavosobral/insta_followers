@@ -5,5 +5,4 @@ function selectAll() {
   for (var i = checkboxes.length - 1; i >= 0; i--) {
     checkboxes[i].checked = true;
   }
-  console.log('Clicked!');
 }
