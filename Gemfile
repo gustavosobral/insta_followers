@@ -12,6 +12,7 @@ gem 'sass'
 gem 'uglifier'
 
 group :development do
+  gem 'rerun'
   gem 'byebug'
   gem 'sqlite3'
   gem 'dm-sqlite-adapter'
