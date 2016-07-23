@@ -10,16 +10,20 @@ require 'sprockets'
 require 'uglifier'
 require 'sass'
 
+# Enviroment configurations
 configure :development do
   DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+  set :force_ssl, false
 end
 
 configure :production do
   DataMapper.setup(:default, ENV['DATABASE_URL'])
+  set :force_ssl, true
 end
 
 DataMapper::Property::String.length(255)
 
+# Project modules
 require_relative 'controllers/index_controller'
 require_relative 'controllers/list_controller'
 
@@ -36,6 +40,7 @@ class Relation
   end
 end
 
+# Sinatra APP
 class InstaFollowers < Sinatra::Base
   Dotenv.load
   enable :cross_origin
@@ -44,6 +49,7 @@ class InstaFollowers < Sinatra::Base
   set :haml, :format => :html5
   set :environment, Sprockets::Environment.new
   set :sessions => true
+  set :session_secret, ENV['SECRET_KEY_BASE']
 
   environment.append_path 'assets/stylesheets'
   environment.append_path 'assets/javascripts'
