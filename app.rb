@@ -26,19 +26,8 @@ DataMapper::Property::String.length(255)
 # Project modules
 require_relative 'controllers/index_controller'
 require_relative 'controllers/list_controller'
-
 require_relative 'models/user'
-
-class Relation
-  attr_accessor :username, :profile_picture, :id, :full_name
-
-  def initialize(object)
-    @id = object.id
-    @username = object.username
-    @full_name = object.full_name
-    @profile_picture = object.profile_picture    
-  end
-end
+require_relative 'lib/services/user_relation'
 
 # Sinatra APP
 class InstaFollowers < Sinatra::Base

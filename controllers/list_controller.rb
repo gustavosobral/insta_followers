@@ -11,12 +11,12 @@ module Sinatra
             response = RestClient.get 'https://api.instagram.com/v1/users/self/follows',
               {:params => {:access_token => @user.access_token}}
             body = JSON.parse response.body, object_class: OpenStruct
-            body.data.each { |user| follows << Relation.new(user) }
+            body.data.each { |user| follows << UserRelation.new(user) }
 
             response = RestClient.get 'https://api.instagram.com/v1/users/self/followed-by',
               {:params => {:access_token => @user.access_token}}
             body = JSON.parse response.body, object_class: OpenStruct
-            body.data.each { |user| followed_by << Relation.new(user) }
+            body.data.each { |user| followed_by << UserRelation.new(user) }
 
             follows.each { |user| @not_followers << user if !followed_by.map(&:username).include? user.username }
             haml :list
